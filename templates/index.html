@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Minion Control Center</title>
+    <style>
+	* { padding: 0; margin: 0}
+    	canvas { background: yellow; display: block; margin: 0 auto; position: absolute; z-index:0;}
+		button {
+		width: 150px;
+		height: 150px;   
+		font-size: 20px;
+		position: absolute;
+		z-index: 5;
+		border: none;
+		outline: none;
+		}
+
+		#button1 {
+			left: 46%;
+			top: 36%;
+			border-radius: 50%;
+			background-color: grey;
+			border:none;
+			outline: none;
+		}
+
+		#response_text {
+		height: 20%;
+		top: 90%;
+		width: 100%;
+		position:fixed;
+		z-index:6;
+		}
+		p {
+		font-family: Sans-Serif;
+		    padding: 25px;
+		    height: 100%;
+		    font-size:40pt;
+		    text-transform:uppercase;
+		    text-align: center;
+		    font-weight:bold;
+		    background: #1560BD;
+		    color: #F0F0F0;
+		    font-style: italic;
+		}
+    </style>
+</head>
+<body>
+    <div id="response_text"><p id="msg_txt">
+{% if uinput != None %}
+    {{uinput}}
+{% endif %}
+	</p></div>
+<canvas id="myCanvas" ></canvas>
+
+<script>
+	var canvas = document.getElementById("myCanvas");
+	var ctx = canvas.getContext("2d");
+	ctx.canvas.width  = window.innerWidth;
+    ctx.canvas.height = window.innerHeight;
+	
+	//black band
+	ctx.beginPath();
+	ctx.rect(0, canvas.height/3, canvas.width, 200);
+	ctx.fillStyle = "#000000";
+	ctx.fill();
+	ctx.closePath();
+	//white circle
+	 ctx.beginPath();
+      ctx.arc(canvas.width/2 + 0,canvas.height/3+100, canvas.width/6, 0, 2 * Math.PI, false);
+      ctx.fillStyle = 'white';
+      ctx.fill();
+	  ctx.closePath();
+	//grey arcs
+	  ctx.beginPath();
+	  // add linear gradient
+      var gradient=ctx.createLinearGradient(canvas.width/2+700,canvas.height/3 +100,100, 0);
+		gradient.addColorStop("0","black");
+		gradient.addColorStop("0.5","grey");
+		gradient.addColorStop("1.0","black");
+      ctx.arc(canvas.width/2 + 0,canvas.height/3+100, canvas.width/6, 0, 2 * Math.PI, false);
+      ctx.strokeStyle = gradient;
+	  ctx.lineWidth = 90;
+      ctx.stroke();
+	  ctx.closePath();
+	
+	function record(){
+	    var elem = document.getElementById('button1');
+	    elem.style.backgroundColor = '#1560BD';
+	    console.log("recording");
+	    setTimeout(function (){
+		var elem = document.getElementById('button1');
+		elem.style.backgroundColor = 'grey';
+	    }, 5000)
+	}
+	function playBack(elem){
+	elem.style.backgroundColor = 'green';
+	console.log("playback");
+	}
+
+	
+</script>
+<form action="/record" method="post">
+<button id="button1" type="submit" name="main_button", onclick="record()"> 
+    <img src="{{url_for('static', filename='icon.png')}}" width="100" height="100">
+</button>
+</form>
+</body>
+</html>

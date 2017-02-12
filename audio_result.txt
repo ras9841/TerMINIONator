@@ -1,0 +1,1 @@
+{"version":"3.0","header":{"status":"success","scenario":"smd","name":"Have a dance party.","lexical":"have a dance party","properties":{"requestid":"bd7d4450-4cff-42a5-8edc-7b80f4eecc68","HIGHCONF":"1"}},"results":[{"scenario":"smd","name":"Have a dance party.","lexical":"have a dance party","confidence":"0.9240168","properties":{"HIGHCONF":"1"}}]}
