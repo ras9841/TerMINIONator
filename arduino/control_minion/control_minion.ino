@@ -11,7 +11,7 @@ int pos = 0;    // variable to store the servo position
 int blueeye = 5;
 int redeye = 6;
 int greeneye = 11;
-int p,i;
+int p,i,g,h;
 int speakerOut = 3;
 
 
@@ -42,6 +42,7 @@ void loop() {
     switch(key){
 
     case '0': //confused arms
+      
       digitalWrite(blueeye,HIGH);
       digitalWrite(redeye,LOW);
       digitalWrite(greeneye,LOW);
@@ -204,8 +205,9 @@ void loop() {
     rightservo.write(150);
     digitalWrite(blueeye,HIGH);
     digitalWrite(redeye,LOW);
-  break;
+  break;  
   } // end of switch
+  
   
   delay(10);
   }   

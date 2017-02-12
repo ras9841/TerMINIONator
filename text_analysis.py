@@ -54,7 +54,13 @@ def send_commands(arduino, key_words, sentiment, full_sent):
                 arduino.write(b'6')
                 look_more = False
     if look_more:
-        arduino.write(b'0')
+        if sentiment < 0.3:
+            arduino.write(b'3');
+        elif sentiment > 0.8:
+            arduino.write(b'5');
+        else:
+            arduino.write(b'0');
+
 def get_response(response, field):
     data = json.loads(response.read().decode('utf-8'))
     results = data['documents'][0]
@@ -105,8 +111,8 @@ def make_request(input_str):
         conn.close()
 		
         # Print results
-        #print("Key Phrases: ",key_phrases)
-        #print("Sentiment Score: ",sentiment)
+        print("Key Phrases: ",key_phrases)
+        print("Sentiment Score: ",sentiment)
         return key_phrases, sentiment
     except Exception as e:
         print(e)
